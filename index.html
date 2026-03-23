@@ -20,6 +20,9 @@
       --text: #3d3d3d;
       --text-light: #7a7a7a;
       --white: #ffffff;
+      --forest: #2d6a4f;
+      --forest-light: #74c69d;
+      --forest-dark: #1b4332;
     }
 
     html { scroll-behavior: smooth; }
@@ -353,15 +356,43 @@
 
     .product-card {
       background: var(--white);
-      border-radius: 4px;
+      border-radius: 8px;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
       cursor: pointer;
+      position: relative;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      padding: 2px;
+      background: linear-gradient(135deg, transparent 40%, var(--gold-light) 50%, transparent 60%);
+      background-size: 200% 200%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+      animation: shimmer 2s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(45,106,79,0.12), 0 8px 24px rgba(196,120,138,0.1);
     }
 
     .product-image {
@@ -449,8 +480,14 @@
     }
 
     .ingredient-icon {
-      font-size: 2.4rem;
-      margin-bottom: 20px;
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+    }
+
+    .ingredient-icon svg {
+      width: 100%;
+      height: 100%;
     }
 
     .ingredient-card h3 {
@@ -599,24 +636,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
       cursor: pointer;
       position: relative;
       overflow: hidden;
     }
 
+    .instagram-item svg {
+      width: 40%;
+      height: 40%;
+      opacity: 0.7;
+    }
+
     .instagram-item::after {
-      content: '♡';
+      content: '';
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(196,120,138,0.7);
-      color: white;
-      font-size: 1.4rem;
+      background: rgba(45,106,79,0.6);
       opacity: 0;
       transition: opacity 0.3s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 28px;
     }
 
     .instagram-item:hover::after { opacity: 1; }
@@ -772,7 +816,7 @@
   <section class="hero" id="hero">
     <div class="hero-content">
       <h1>Reveal Your <span>Radiance</span></h1>
-      <p>Luxury skincare crafted with nature's finest botanicals. Science-backed formulas for timeless beauty.</p>
+      <p>Luxury skincare forged in the heart of the Malaysian rainforest. Rare botanicals meet cutting-edge science for truly transformative beauty.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn btn-primary">Shop Collection</a>
         <a href="#about" class="btn btn-outline">Our Story</a>
@@ -783,18 +827,18 @@
   <!-- MARQUEE -->
   <div class="marquee-section">
     <div class="marquee-track">
-      <span>✦ Cruelty Free</span>
-      <span>✦ Vegan Ingredients</span>
-      <span>✦ Dermatologist Tested</span>
-      <span>✦ Sustainable Packaging</span>
-      <span>✦ Paraben Free</span>
-      <span>✦ Clinically Proven</span>
-      <span>✦ Cruelty Free</span>
-      <span>✦ Vegan Ingredients</span>
-      <span>✦ Dermatologist Tested</span>
-      <span>✦ Sustainable Packaging</span>
-      <span>✦ Paraben Free</span>
-      <span>✦ Clinically Proven</span>
+      <span>&mdash; Cruelty Free</span>
+      <span>&mdash; Rainforest Sourced</span>
+      <span>&mdash; Dermatologist Tested</span>
+      <span>&mdash; Sustainable Harvesting</span>
+      <span>&mdash; Paraben Free</span>
+      <span>&mdash; Malaysian Botanicals</span>
+      <span>&mdash; Cruelty Free</span>
+      <span>&mdash; Rainforest Sourced</span>
+      <span>&mdash; Dermatologist Tested</span>
+      <span>&mdash; Sustainable Harvesting</span>
+      <span>&mdash; Paraben Free</span>
+      <span>&mdash; Malaysian Botanicals</span>
     </div>
   </div>
 
@@ -803,13 +847,39 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-image reveal">
-          🌸
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:80%;height:80%">
+            <!-- Rainforest canopy -->
+            <ellipse cx="200" cy="120" rx="160" ry="100" fill="#1b4332" opacity="0.3"/>
+            <ellipse cx="150" cy="140" rx="120" ry="80" fill="#2d6a4f" opacity="0.4"/>
+            <ellipse cx="260" cy="130" rx="110" ry="90" fill="#2d6a4f" opacity="0.35"/>
+            <!-- Tree trunks -->
+            <rect x="130" y="140" width="12" height="200" rx="3" fill="#5c4033" opacity="0.7"/>
+            <rect x="250" y="120" width="14" height="220" rx="3" fill="#6b4f3a" opacity="0.6"/>
+            <rect x="190" y="100" width="16" height="260" rx="4" fill="#5c4033" opacity="0.8"/>
+            <!-- Canopy leaves -->
+            <ellipse cx="138" cy="145" rx="50" ry="35" fill="#74c69d" opacity="0.6"/>
+            <ellipse cx="200" cy="105" rx="60" ry="40" fill="#52b788" opacity="0.5"/>
+            <ellipse cx="258" cy="125" rx="55" ry="38" fill="#74c69d" opacity="0.55"/>
+            <ellipse cx="170" cy="120" rx="45" ry="30" fill="#40916c" opacity="0.4"/>
+            <ellipse cx="235" cy="110" rx="48" ry="32" fill="#52b788" opacity="0.45"/>
+            <!-- Ferns -->
+            <path d="M80 380 Q100 340 90 300 Q110 330 120 360 Q115 320 130 290 Q135 330 140 370" fill="none" stroke="#74c69d" stroke-width="2" opacity="0.6"/>
+            <path d="M300 390 Q310 350 305 310 Q320 340 330 370 Q325 330 340 300 Q340 340 345 380" fill="none" stroke="#52b788" stroke-width="2" opacity="0.5"/>
+            <!-- Mist -->
+            <ellipse cx="200" cy="300" rx="180" ry="20" fill="white" opacity="0.15"/>
+            <ellipse cx="160" cy="340" rx="140" ry="15" fill="white" opacity="0.1"/>
+            <!-- Ground -->
+            <ellipse cx="200" cy="420" rx="170" ry="30" fill="#2d6a4f" opacity="0.2"/>
+            <!-- ASHER text -->
+            <text x="200" y="460" text-anchor="middle" font-size="24" font-weight="200" letter-spacing="0.3em" fill="#2d6a4f" font-family="sans-serif" opacity="0.6">ASHER</text>
+            <text x="200" y="480" text-anchor="middle" font-size="9" letter-spacing="0.2em" fill="#74c69d" font-family="sans-serif" opacity="0.5">MALAYSIAN RAINFOREST</text>
+          </svg>
         </div>
         <div class="about-text reveal">
           <p class="section-label">Our Story</p>
-          <h2 class="section-title">Beauty Rooted in Nature</h2>
-          <p>Founded in 2018, Asher was born from a simple belief: that luxury skincare should be as kind to the earth as it is to your skin. We source the finest botanical extracts from sustainable farms worldwide.</p>
-          <p>Every formula is meticulously crafted by our team of cosmetic scientists and herbalists, blending cutting-edge science with centuries-old botanical wisdom.</p>
+          <h2 class="section-title">Born in the Malaysian Rainforest</h2>
+          <p>Founded in 2018, Asher was born deep within the ancient rainforests of Borneo and Peninsular Malaysia. We partner with indigenous communities to sustainably harvest the world's rarest botanicals &mdash; from wild Tongkat Ali root to high-canopy Tualang honey.</p>
+          <p>Every formula is meticulously crafted by our team of cosmetic scientists and traditional herbalists, blending cutting-edge biotechnology with 5,000 years of rainforest botanical wisdom passed down through generations.</p>
           <div class="about-stats">
             <div class="stat">
               <h3>50+</h3>
@@ -856,7 +926,7 @@
           </div>
           <div class="product-info">
             <h3>Rose Petal Serum</h3>
-            <p class="product-type">Hydrating Serum — 30ml</p>
+            <p class="product-type">Hydrating Serum &mdash; 30ml &mdash; Malaysian Damask Rose</p>
             <p class="product-price">$78</p>
           </div>
         </div>
@@ -878,7 +948,7 @@
           </div>
           <div class="product-info">
             <h3>Golden Hour Glow Oil</h3>
-            <p class="product-type">Face Oil — 25ml</p>
+            <p class="product-type">Face Oil &mdash; 25ml &mdash; Borneo Tamanu Oil</p>
             <p class="product-price">$92</p>
           </div>
         </div>
@@ -899,7 +969,7 @@
           </div>
           <div class="product-info">
             <h3>Midnight Repair Crème</h3>
-            <p class="product-type">Night Cream — 50ml</p>
+            <p class="product-type">Night Cream &mdash; 50ml &mdash; Tongkat Ali Root</p>
             <p class="product-price">$110</p>
           </div>
         </div>
@@ -923,7 +993,7 @@
           </div>
           <div class="product-info">
             <h3>Botanical Eye Elixir</h3>
-            <p class="product-type">Eye Cream — 15ml</p>
+            <p class="product-type">Eye Cream &mdash; 15ml &mdash; Wild Pandan Leaf</p>
             <p class="product-price">$64 <span class="old-price">$80</span></p>
           </div>
         </div>
@@ -935,29 +1005,29 @@
   <!-- INGREDIENTS -->
   <section class="ingredients" id="ingredients">
     <div class="container">
-      <p class="section-label reveal">What's Inside</p>
-      <h2 class="section-title reveal">Premium Ingredients</h2>
-      <p class="section-subtitle reveal">We believe in transparency. Every ingredient is ethically sourced and scientifically validated.</p>
+      <p class="section-label reveal">Rainforest Treasures</p>
+      <h2 class="section-title reveal">From the Heart of Malaysia</h2>
+      <p class="section-subtitle reveal">Sustainably harvested from the world's oldest tropical rainforest. Every ingredient is wild-crafted and scientifically validated.</p>
       <div class="ingredients-grid">
         <div class="ingredient-card reveal">
-          <div class="ingredient-icon">🌿</div>
-          <h3>Hyaluronic Acid</h3>
-          <p>Deep hydration that plumps and smooths your skin from within.</p>
+          <div class="ingredient-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 8 C28 20 20 28 16 40 C12 52 22 58 32 56 C42 58 52 52 48 40 C44 28 36 20 32 8Z" fill="none" stroke="#2d6a4f" stroke-width="1.5"/><line x1="32" y1="14" x2="32" y2="52" stroke="#2d6a4f" stroke-width="1"/><path d="M32 24 Q26 28 22 36" fill="none" stroke="#74c69d" stroke-width="0.8"/><path d="M32 30 Q38 34 42 40" fill="none" stroke="#74c69d" stroke-width="0.8"/><path d="M32 38 Q27 40 24 46" fill="none" stroke="#74c69d" stroke-width="0.8"/></svg></div>
+          <h3>Tongkat Ali Root</h3>
+          <p>Rare adaptogenic root from deep Borneo forests, revered for its powerful skin-firming and anti-aging properties.</p>
         </div>
         <div class="ingredient-card reveal">
-          <div class="ingredient-icon">🫧</div>
-          <h3>Niacinamide</h3>
-          <p>Minimizes pores and evens skin tone for a luminous complexion.</p>
+          <div class="ingredient-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 6 Q48 20 48 36 C48 50 40 58 32 58 C24 58 16 50 16 36 Q16 20 32 6Z" fill="none" stroke="#2d6a4f" stroke-width="1.5"/><path d="M32 58 L32 14" stroke="#2d6a4f" stroke-width="1"/><path d="M20 32 Q26 28 32 32 Q38 36 44 32" fill="none" stroke="#74c69d" stroke-width="0.8"/><path d="M22 42 Q27 38 32 42 Q37 46 42 42" fill="none" stroke="#74c69d" stroke-width="0.8"/><circle cx="32" cy="22" r="3" fill="#74c69d" opacity="0.4"/></svg></div>
+          <h3>Pandan Leaf Extract</h3>
+          <p>Fragrant tropical leaf prized in Malaysian tradition for its antioxidant richness and natural skin-brightening power.</p>
         </div>
         <div class="ingredient-card reveal">
-          <div class="ingredient-icon">🌺</div>
-          <h3>Rosehip Extract</h3>
-          <p>Rich in vitamins A and C to brighten and rejuvenate tired skin.</p>
+          <div class="ingredient-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="12" fill="none" stroke="#c4788a" stroke-width="1.5"/><circle cx="32" cy="32" r="4" fill="#c4788a" opacity="0.3"/><path d="M32 8 Q36 18 32 20 Q28 18 32 8Z" fill="#c4788a" opacity="0.5"/><path d="M32 56 Q36 46 32 44 Q28 46 32 56Z" fill="#c4788a" opacity="0.5"/><path d="M8 32 Q18 28 20 32 Q18 36 8 32Z" fill="#c4788a" opacity="0.5"/><path d="M56 32 Q46 28 44 32 Q46 36 56 32Z" fill="#c4788a" opacity="0.5"/><path d="M15 15 Q22 20 22 22 Q20 22 15 15Z" fill="#c4788a" opacity="0.4"/><path d="M49 49 Q42 44 42 42 Q44 42 49 49Z" fill="#c4788a" opacity="0.4"/><path d="M49 15 Q44 22 42 22 Q42 20 49 15Z" fill="#c4788a" opacity="0.4"/><path d="M15 49 Q20 42 22 42 Q22 44 15 49Z" fill="#c4788a" opacity="0.4"/></svg></div>
+          <h3>Wild Hibiscus Essence</h3>
+          <p>Handpicked from Malaysian highlands, this "Botox plant" is loaded with natural AHAs that rejuvenate and firm.</p>
         </div>
         <div class="ingredient-card reveal">
-          <div class="ingredient-icon">🍯</div>
-          <h3>Manuka Honey</h3>
-          <p>Natural antibacterial properties that nourish and protect delicate skin.</p>
+          <div class="ingredient-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M18 16 L32 8 L46 16 L46 32 L32 40 L18 32Z" fill="none" stroke="#c9a96e" stroke-width="1.2"/><path d="M32 8 L32 40" stroke="#c9a96e" stroke-width="0.8"/><path d="M18 16 L46 32" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/><path d="M46 16 L18 32" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/><path d="M22 38 Q28 48 24 56" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.6"/><path d="M32 42 Q34 50 30 58" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.6"/><path d="M42 38 Q38 48 40 56" fill="none" stroke="#c9a96e" stroke-width="1" opacity="0.6"/><circle cx="24" cy="56" r="2" fill="#c9a96e" opacity="0.4"/><circle cx="30" cy="58" r="2" fill="#c9a96e" opacity="0.4"/><circle cx="40" cy="56" r="2" fill="#c9a96e" opacity="0.4"/></svg></div>
+          <h3>Tualang Honey</h3>
+          <p>Harvested from giant Tualang trees towering 80 meters high in the Malaysian canopy &mdash; nature's most potent antibacterial nectar.</p>
         </div>
       </div>
     </div>
@@ -1018,12 +1088,24 @@
       <h2 class="section-title reveal">@asher.beauty</h2>
     </div>
     <div class="instagram-grid">
-      <div class="instagram-item" style="background: linear-gradient(135deg, #fce4ec, #f48fb1);">🌸</div>
-      <div class="instagram-item" style="background: linear-gradient(135deg, #fff3e0, #ffcc80);">✨</div>
-      <div class="instagram-item" style="background: linear-gradient(135deg, #f3e5f5, #ce93d8);">💜</div>
-      <div class="instagram-item" style="background: linear-gradient(135deg, #e0f2f1, #80cbc4);">🍃</div>
-      <div class="instagram-item" style="background: linear-gradient(135deg, #fce4ec, #ef9a9a);">🌹</div>
-      <div class="instagram-item" style="background: linear-gradient(135deg, #fff8e1, #ffe082);">🌿</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #e0f2f1, #74c69d);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M40 10 Q55 25 50 45 Q45 60 40 70 Q35 60 30 45 Q25 25 40 10Z" fill="white" opacity="0.5"/><line x1="40" y1="15" x2="40" y2="65" stroke="white" stroke-width="0.8" opacity="0.6"/></svg>
+      </div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fff8e1, #c9a96e);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M25 20 L40 12 L55 20 L55 40 L40 48 L25 40Z" fill="none" stroke="white" stroke-width="1" opacity="0.6"/><path d="M30 50 Q36 58 34 68" stroke="white" stroke-width="0.8" opacity="0.5"/><path d="M46 50 Q42 60 44 68" stroke="white" stroke-width="0.8" opacity="0.5"/></svg>
+      </div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #1b4332, #2d6a4f);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect x="32" y="15" width="16" height="50" rx="8" fill="white" opacity="0.3"/><rect x="28" y="10" width="24" height="8" rx="4" fill="white" opacity="0.4"/><text x="40" y="45" text-anchor="middle" font-size="6" fill="white" opacity="0.6" font-family="sans-serif">A</text></svg>
+      </div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #2d6a4f, #52b788);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M20 60 Q25 30 40 15 Q55 30 60 60" fill="none" stroke="white" stroke-width="1" opacity="0.5"/><path d="M30 55 Q35 35 40 25 Q45 35 50 55" fill="white" opacity="0.2"/><circle cx="40" cy="50" r="8" fill="white" opacity="0.15"/></svg>
+      </div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fce4ec, #c4788a);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="15" fill="none" stroke="white" stroke-width="1" opacity="0.5"/><circle cx="40" cy="40" r="5" fill="white" opacity="0.3"/><path d="M40 15 Q44 22 40 25 Q36 22 40 15Z" fill="white" opacity="0.4"/><path d="M40 65 Q44 58 40 55 Q36 58 40 65Z" fill="white" opacity="0.4"/><path d="M15 40 Q22 36 25 40 Q22 44 15 40Z" fill="white" opacity="0.4"/><path d="M65 40 Q58 36 55 40 Q58 44 65 40Z" fill="white" opacity="0.4"/></svg>
+      </div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #40916c, #74c69d);">
+        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><path d="M25 65 Q30 40 40 20 Q50 40 55 65" fill="none" stroke="white" stroke-width="1" opacity="0.4"/><path d="M40 25 Q32 35 28 50" fill="none" stroke="white" stroke-width="0.8" opacity="0.5"/><path d="M40 35 Q48 42 52 55" fill="none" stroke="white" stroke-width="0.8" opacity="0.5"/></svg>
+      </div>
     </div>
   </section>
 
@@ -1033,7 +1115,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <span class="logo">Asher</span>
-          <p>Luxury cosmetics rooted in nature. Every product is a love letter to your skin and our planet.</p>
+          <p>Luxury cosmetics born in the Malaysian rainforest. Every product is a love letter to your skin, woven from the rarest tropical botanicals on Earth.</p>
         </div>
         <div class="footer-col">
           <h4>Shop</h4>
@@ -1061,10 +1143,10 @@
       <div class="footer-bottom">
         <p>&copy; 2026 Asher Beauty. All rights reserved.</p>
         <div class="social-links">
-          <a href="#" aria-label="Instagram">◉</a>
-          <a href="#" aria-label="Twitter">✕</a>
-          <a href="#" aria-label="Facebook">ƒ</a>
-          <a href="#" aria-label="Pinterest">℗</a>
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="6" r="1.5" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V15.47H7.078V12h3.047V9.356c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.875V12h3.328l-.532 3.47h-2.796v8.384C19.612 22.954 24 17.99 24 12z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.462-6.233 7.462-1.214 0-2.354-.632-2.745-1.378l-.746 2.853c-.27 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
         </div>
       </div>
     </div>
