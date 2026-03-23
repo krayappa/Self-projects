@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASHER — Premium Cosmetics</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #c4788a;
+      --rose-light: #e8b4bf;
+      --rose-dark: #8e3a50;
+      --gold: #c9a96e;
+      --gold-light: #e6d5a8;
+      --cream: #fdf6f0;
+      --nude: #f5ebe0;
+      --charcoal: #2b2b2b;
+      --text: #3d3d3d;
+      --text-light: #7a7a7a;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1, h2, h3, h4 {
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--rose);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: var(--text-light);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+      padding: 12px 0;
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: color 0.4s;
+    }
+
+    nav.scrolled .logo { color: var(--charcoal); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav.scrolled .nav-links a { color: var(--text); }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--rose);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: background 0.3s;
+    }
+
+    nav.scrolled .hamburger span { background: var(--charcoal); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #2b2b2b 0%, #4a3040 40%, #8e3a50 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,120,138,0.25) 0%, transparent 70%);
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.2) 0%, transparent 70%);
+      animation: floatOrb 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-40px, 30px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      color: var(--white);
+      font-weight: 200;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--rose-light); }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--rose);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--rose-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(142,58,80,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.4);
+      margin-left: 16px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--rose-light);
+      color: var(--rose-light);
+    }
+
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== MARQUEE ===== */
+    .marquee-section {
+      background: var(--nude);
+      padding: 20px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 48px;
+      animation: marquee 20s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-track span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text-light);
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 100px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-image {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--nude) 0%, var(--rose-light) 100%);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 2px;
+    }
+
+    .about-text .section-label { text-align: left; }
+    .about-text .section-title { text-align: left; }
+
+    .about-text p {
+      color: var(--text-light);
+      margin-bottom: 24px;
+      font-size: 1.02rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      color: var(--rose);
+      font-weight: 300;
+    }
+
+    .stat p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+    }
+
+    /* ===== PRODUCTS ===== */
+    .products {
+      padding: 100px 0;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+
+    .product-image {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--rose);
+      color: var(--white);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 4px 12px;
+    }
+
+    .product-info {
+      padding: 24px;
+      text-align: left;
+    }
+
+    .product-info h3 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .product-info .product-type {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      color: var(--rose-dark);
+      font-weight: 400;
+    }
+
+    .product-price .old-price {
+      text-decoration: line-through;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+
+    /* ===== INGREDIENTS ===== */
+    .ingredients {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .ingredient-card {
+      padding: 40px 24px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .ingredient-card:hover {
+      border-color: var(--rose-light);
+      box-shadow: 0 8px 32px rgba(196,120,138,0.1);
+    }
+
+    .ingredient-icon {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    .ingredient-card h3 {
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .ingredient-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #2b2b2b 0%, #4a3040 100%);
+      text-align: center;
+      color: var(--white);
+    }
+
+    .testimonials .section-label { color: var(--gold-light); }
+    .testimonials .section-title { color: var(--white); }
+    .testimonials .section-subtitle { color: rgba(255,255,255,0.6); }
+
+    .testimonial-slider {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .testimonial-slide {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .testimonial-slide.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      letter-spacing: 4px;
+    }
+
+    .testimonial-text {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 28px;
+    }
+
+    .testimonial-author {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--rose-light);
+    }
+
+    .slider-dots {
+      margin-top: 36px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .slider-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slider-dots button.active {
+      background: var(--rose);
+      border-color: var(--rose);
+    }
+
+    /* ===== NEWSLETTER ===== */
+    .newsletter {
+      padding: 100px 0;
+      text-align: center;
+      background: var(--nude);
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 1px solid #ddd;
+      border-right: none;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .newsletter-form input:focus { border-color: var(--rose); }
+
+    .newsletter-form button {
+      padding: 16px 32px;
+      background: var(--rose);
+      color: var(--white);
+      border: none;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.3s;
+    }
+
+    .newsletter-form button:hover { background: var(--rose-dark); }
+
+    /* ===== INSTAGRAM ===== */
+    .instagram {
+      padding: 80px 0 0;
+      text-align: center;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      margin-top: 48px;
+    }
+
+    .instagram-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .instagram-item::after {
+      content: '♡';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(196,120,138,0.7);
+      color: white;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .instagram-item:hover::after { opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.7);
+      padding: 80px 0 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      color: var(--white);
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .footer-col a:hover { color: var(--rose-light); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .social-links { display: flex; gap: 20px; }
+    .social-links a { font-size: 1.1rem; }
+    .social-links a:hover { color: var(--rose-light); }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 44px;
+      height: 44px;
+      background: var(--rose);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--rose-dark); transform: translateY(-3px); }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 24px;
+        gap: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.open a { color: var(--text); }
+
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-outline { margin-left: 0; }
+      .about-stats { gap: 24px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form input { border-right: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="container">
+      <a href="#" class="logo">Asher</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#ingredients">Ingredients</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#newsletter">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Reveal Your <span>Radiance</span></h1>
+      <p>Luxury skincare crafted with nature's finest botanicals. Science-backed formulas for timeless beauty.</p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-primary">Shop Collection</a>
+        <a href="#about" class="btn btn-outline">Our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span>✦ Cruelty Free</span>
+      <span>✦ Vegan Ingredients</span>
+      <span>✦ Dermatologist Tested</span>
+      <span>✦ Sustainable Packaging</span>
+      <span>✦ Paraben Free</span>
+      <span>✦ Clinically Proven</span>
+      <span>✦ Cruelty Free</span>
+      <span>✦ Vegan Ingredients</span>
+      <span>✦ Dermatologist Tested</span>
+      <span>✦ Sustainable Packaging</span>
+      <span>✦ Paraben Free</span>
+      <span>✦ Clinically Proven</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal">
+          🌸
+        </div>
+        <div class="about-text reveal">
+          <p class="section-label">Our Story</p>
+          <h2 class="section-title">Beauty Rooted in Nature</h2>
+          <p>Founded in 2018, Asher was born from a simple belief: that luxury skincare should be as kind to the earth as it is to your skin. We source the finest botanical extracts from sustainable farms worldwide.</p>
+          <p>Every formula is meticulously crafted by our team of cosmetic scientists and herbalists, blending cutting-edge science with centuries-old botanical wisdom.</p>
+          <div class="about-stats">
+            <div class="stat">
+              <h3>50+</h3>
+              <p>Products</p>
+            </div>
+            <div class="stat">
+              <h3>120k</h3>
+              <p>Happy Clients</p>
+            </div>
+            <div class="stat">
+              <h3>98%</h3>
+              <p>Natural Ingredients</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="products">
+    <div class="container">
+      <p class="section-label reveal">The Collection</p>
+      <h2 class="section-title reveal">Bestsellers</h2>
+      <p class="section-subtitle reveal">Discover our most loved formulas, curated for every skin type and concern.</p>
+      <div class="products-grid">
+
+        <div class="product-card reveal">
+          <div class="product-image" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0);">
+            <span class="product-badge">Bestseller</span>
+            🌹
+          </div>
+          <div class="product-info">
+            <h3>Rose Petal Serum</h3>
+            <p class="product-type">Hydrating Serum — 30ml</p>
+            <p class="product-price">$78</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-image" style="background: linear-gradient(135deg, #fff8e1, #ffe0b2);">
+            ✨
+          </div>
+          <div class="product-info">
+            <h3>Golden Hour Glow Oil</h3>
+            <p class="product-type">Face Oil — 25ml</p>
+            <p class="product-price">$92</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-image" style="background: linear-gradient(135deg, #e8eaf6, #c5cae9);">
+            💎
+          </div>
+          <div class="product-info">
+            <h3>Midnight Repair Crème</h3>
+            <p class="product-type">Night Cream — 50ml</p>
+            <p class="product-price">$110</p>
+          </div>
+        </div>
+
+        <div class="product-card reveal">
+          <div class="product-image" style="background: linear-gradient(135deg, #e0f2f1, #b2dfdb);">
+            <span class="product-badge">New</span>
+            🍃
+          </div>
+          <div class="product-info">
+            <h3>Botanical Eye Elixir</h3>
+            <p class="product-type">Eye Cream — 15ml</p>
+            <p class="product-price">$64 <span class="old-price">$80</span></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS -->
+  <section class="ingredients" id="ingredients">
+    <div class="container">
+      <p class="section-label reveal">What's Inside</p>
+      <h2 class="section-title reveal">Premium Ingredients</h2>
+      <p class="section-subtitle reveal">We believe in transparency. Every ingredient is ethically sourced and scientifically validated.</p>
+      <div class="ingredients-grid">
+        <div class="ingredient-card reveal">
+          <div class="ingredient-icon">🌿</div>
+          <h3>Hyaluronic Acid</h3>
+          <p>Deep hydration that plumps and smooths your skin from within.</p>
+        </div>
+        <div class="ingredient-card reveal">
+          <div class="ingredient-icon">🫧</div>
+          <h3>Niacinamide</h3>
+          <p>Minimizes pores and evens skin tone for a luminous complexion.</p>
+        </div>
+        <div class="ingredient-card reveal">
+          <div class="ingredient-icon">🌺</div>
+          <h3>Rosehip Extract</h3>
+          <p>Rich in vitamins A and C to brighten and rejuvenate tired skin.</p>
+        </div>
+        <div class="ingredient-card reveal">
+          <div class="ingredient-icon">🍯</div>
+          <h3>Manuka Honey</h3>
+          <p>Natural antibacterial properties that nourish and protect delicate skin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <p class="section-label reveal">Love Letters</p>
+      <h2 class="section-title reveal">What Our Clients Say</h2>
+      <p class="section-subtitle reveal">Real stories from real people who found their glow.</p>
+      <div class="testimonial-slider reveal">
+
+        <div class="testimonial-slide active">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Rose Petal Serum has completely transformed my morning routine. My skin has never felt this hydrated and radiant. I've tried dozens of serums — this is the one."</p>
+          <p class="testimonial-author">— Sophia Laurent, Paris</p>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I was skeptical about luxury skincare until I tried Asher. The Golden Hour Glow Oil gives me the most beautiful natural glow. Worth every penny."</p>
+          <p class="testimonial-author">— Amara Chen, Singapore</p>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Midnight Repair Crème is magic. I wake up with visibly smoother skin every single morning. My friends keep asking me what I've changed!"</p>
+          <p class="testimonial-author">— Isabella Reyes, New York</p>
+        </div>
+
+        <div class="slider-dots">
+          <button class="active" data-slide="0" aria-label="Slide 1"></button>
+          <button data-slide="1" aria-label="Slide 2"></button>
+          <button data-slide="2" aria-label="Slide 3"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <p class="section-label reveal">Stay Connected</p>
+      <h2 class="section-title reveal">Join the Asher Family</h2>
+      <p class="section-subtitle reveal">Subscribe for exclusive offers, beauty tips, and early access to new launches.</p>
+      <form class="newsletter-form reveal" id="newsletterForm">
+        <input type="email" placeholder="Your email address" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram">
+    <div class="container">
+      <p class="section-label reveal">Follow Us</p>
+      <h2 class="section-title reveal">@asher.beauty</h2>
+    </div>
+    <div class="instagram-grid">
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fce4ec, #f48fb1);">🌸</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fff3e0, #ffcc80);">✨</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #f3e5f5, #ce93d8);">💜</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #e0f2f1, #80cbc4);">🍃</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fce4ec, #ef9a9a);">🌹</div>
+      <div class="instagram-item" style="background: linear-gradient(135deg, #fff8e1, #ffe082);">🌿</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">Asher</span>
+          <p>Luxury cosmetics rooted in nature. Every product is a love letter to your skin and our planet.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="#">Serums</a>
+          <a href="#">Moisturizers</a>
+          <a href="#">Eye Care</a>
+          <a href="#">Face Oils</a>
+          <a href="#">Gift Sets</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">Our Story</a>
+          <a href="#">Ingredients</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Contact Us</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Asher Beauty. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">◉</a>
+          <a href="#" aria-label="Twitter">✕</a>
+          <a href="#" aria-label="Facebook">ƒ</a>
+          <a href="#" aria-label="Pinterest">℗</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Testimonial slider
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.slider-dots button');
+    let currentSlide = 0;
+    let autoplayTimer;
+
+    function showSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      currentSlide = index;
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        showSlide(parseInt(dot.dataset.slide));
+        clearInterval(autoplayTimer);
+        startAutoplay();
+      });
+    });
+
+    function startAutoplay() {
+      autoplayTimer = setInterval(() => {
+        showSlide((currentSlide + 1) % slides.length);
+      }, 5000);
+    }
+    startAutoplay();
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Back to top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Newsletter form
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = e.target.querySelector('input');
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Subscribed ✓';
+      btn.style.background = '#4a7c59';
+      input.value = '';
+      setTimeout(() => {
+        btn.textContent = 'Subscribe';
+        btn.style.background = '';
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
