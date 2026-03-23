@@ -248,6 +248,7 @@
 
     .canopy-layer,
     .mist-layer,
+    .rain-layer,
     .fireflies {
       position: absolute;
       inset: 0;
@@ -285,6 +286,30 @@
       animation: drift 14s ease-in-out infinite alternate;
       opacity: 0.85;
     }
+
+    .rain-layer {
+      overflow: hidden;
+      opacity: 0.24;
+      mix-blend-mode: screen;
+    }
+
+    .rain-layer span {
+      position: absolute;
+      top: -18%;
+      width: 1px;
+      height: 120px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(220, 232, 222, 0.7), rgba(255, 255, 255, 0));
+      animation: rainfall linear infinite;
+    }
+
+    .rain-layer span:nth-child(1) { left: 7%; animation-duration: 1.8s; animation-delay: -0.4s; }
+    .rain-layer span:nth-child(2) { left: 18%; animation-duration: 1.5s; animation-delay: -1.2s; }
+    .rain-layer span:nth-child(3) { left: 29%; animation-duration: 1.9s; animation-delay: -0.8s; }
+    .rain-layer span:nth-child(4) { left: 41%; animation-duration: 1.6s; animation-delay: -1.6s; }
+    .rain-layer span:nth-child(5) { left: 54%; animation-duration: 2s; animation-delay: -0.9s; }
+    .rain-layer span:nth-child(6) { left: 66%; animation-duration: 1.7s; animation-delay: -1.1s; }
+    .rain-layer span:nth-child(7) { left: 79%; animation-duration: 1.45s; animation-delay: -0.6s; }
+    .rain-layer span:nth-child(8) { left: 91%; animation-duration: 1.85s; animation-delay: -1.4s; }
 
     .fireflies span {
       position: absolute;
@@ -1299,6 +1324,11 @@
       100% { transform: translate3d(18px, 14px, 0); }
     }
 
+    @keyframes rainfall {
+      0% { transform: translate3d(-8px, 0, 0) rotate(12deg); }
+      100% { transform: translate3d(22px, 120vh, 0) rotate(12deg); }
+    }
+
     @keyframes trailMove {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -1452,6 +1482,9 @@
     <div class="canopy-layer one" data-depth="14"></div>
     <div class="canopy-layer two" data-depth="8"></div>
     <div class="mist-layer" data-depth="4"></div>
+    <div class="rain-layer" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
     <div class="fireflies">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -1561,22 +1594,22 @@
   <section class="section-shell trail" id="story">
     <div class="container story-panel reveal">
       <div class="story-copy">
-        <p class="section-label">Origin Path</p>
-        <h2 class="section-title">The page should feel like walking beneath a wet canopy.</h2>
-        <p>That was the brief. So the design now opens in darkness, then lifts into mist, gold light, moss greens, and warm earth tones. Instead of a flat cosmetics layout, the page moves like a rainforest trail: dense entrance, glowing clearings, then rich botanical detail.</p>
-        <p>Everything is anchored in Malaysia, from Borneo tamanu oil to Tualang honey gathered high in the canopy. The visuals are intentionally atmospheric so the products feel discovered, not dropped into a template.</p>
+        <p class="section-label">Our Origin</p>
+        <h2 class="section-title">Built from ingredients sourced where the rainforest is still alive and working.</h2>
+        <p>Asher began with repeated sourcing trips through Sabah, Pahang, and the older forest edges of Peninsular Malaysia, where growers, beekeepers, and herbal processors still work close to the land. What started as ingredient research turned into long-term partnerships built around traceability, slower harvesting, and small-batch extraction.</p>
+        <p>That is why the collection centers on materials with a real place behind them: tamanu pressed near the Borneo coast, pandan gathered for its fresh green oils, Tongkat Ali selected for strength and recovery, and Tualang honey collected high above the forest floor. The goal was never to sound exotic. It was to make products that carry the climate, texture, and richness of where they come from.</p>
         <div class="story-stats">
           <article>
-            <strong>3</strong>
-            <span>Landscape layers</span>
+            <strong>Sabah</strong>
+            <span>Coastal and inland sourcing</span>
           </article>
           <article>
-            <strong>6</strong>
-            <span>Atmosphere cues</span>
+            <strong>Pahang</strong>
+            <span>Tualang honey territory</span>
           </article>
           <article>
-            <strong>1</strong>
-            <span>Immersive story world</span>
+            <strong>Small Batch</strong>
+            <span>Lower-volume extraction</span>
           </article>
         </div>
       </div>
