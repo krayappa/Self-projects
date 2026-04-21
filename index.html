@@ -245,7 +245,6 @@
           <a id="waBtn" class="btn primary" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <a id="linkedinBtn" class="btn alt" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a id="emailBtn" class="btn alt">Email</a>
-          <button id="copyPageLinkBtn" class="btn alt" type="button">Copy Card Link</button>
           <a id="downloadVcfBtn" class="btn alt" download="Kevin_Rayappan.vcf">Download Contact</a>
         </div>
 
@@ -275,7 +274,6 @@
 
     const waMessage = "Hi Kevin, I scanned your digital name card and would like to connect.";
     const waLink = "https://wa.me/" + profile.phoneWa + "?text=" + encodeURIComponent(waMessage);
-    const cardUrl = window.location.href.split("#")[0];
 
     const vcard = [
       "BEGIN:VCARD",
@@ -321,20 +319,6 @@
 
     const downloadVcfBtn = document.getElementById("downloadVcfBtn");
     downloadVcfBtn.href = URL.createObjectURL(new Blob([vcard], { type: "text/vcard;charset=utf-8" }));
-
-    const copyPageLinkBtn = document.getElementById("copyPageLinkBtn");
-    copyPageLinkBtn.addEventListener("click", async () => {
-      const oldText = copyPageLinkBtn.textContent;
-      try {
-        await navigator.clipboard.writeText(cardUrl);
-        copyPageLinkBtn.textContent = "Copied";
-      } catch (_err) {
-        window.prompt("Copy this page URL", cardUrl);
-      }
-      setTimeout(() => {
-        copyPageLinkBtn.textContent = oldText;
-      }, 1400);
-    });
 
   </script>
 </body>
