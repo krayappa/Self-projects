@@ -10,14 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #112022;
-      --muted: #3f5256;
-      --paper: #fffef9;
-      --line: rgba(17, 32, 34, 0.15);
-      --brand: #0071c5;
-      --brand-dark: #00538f;
-      --accent: #ff7f50;
-      --shadow: rgba(17, 32, 34, 0.14);
+      --ink: #082045;
+      --muted: #2f4d7b;
+      --paper: #f4f8ff;
+      --line: rgba(0, 85, 162, 0.22);
+      --brand: #0068b5;
+      --brand-dark: #003c71;
+      --accent: #00aeea;
+      --shadow: rgba(5, 25, 64, 0.2);
     }
 
     * {
@@ -30,9 +30,9 @@
       font-family: "Sora", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1200px 600px at -10% -20%, #ffd8b8 0%, transparent 45%),
-        radial-gradient(900px 700px at 120% 0%, #c6e8ff 0%, transparent 48%),
-        linear-gradient(130deg, #fff7ec 0%, #e8f6ff 45%, #fffdf8 100%);
+        radial-gradient(1100px 560px at -10% -20%, #74c9ff 0%, transparent 50%),
+        radial-gradient(900px 680px at 120% 0%, #2f80d8 0%, transparent 52%),
+        linear-gradient(135deg, #d6ecff 0%, #a7d4ff 44%, #edf6ff 100%);
       padding: 28px 16px;
       display: grid;
       place-items: center;
@@ -42,7 +42,7 @@
       width: min(1024px, 100%);
       border: 1px solid var(--line);
       border-radius: 26px;
-      background: color-mix(in oklab, var(--paper) 90%, white 10%);
+      background: color-mix(in oklab, var(--paper) 94%, white 6%);
       backdrop-filter: blur(8px);
       box-shadow: 0 22px 50px var(--shadow);
       overflow: hidden;
@@ -63,8 +63,8 @@
     .right {
       border-left: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9)),
-        radial-gradient(circle at 0% 0%, rgba(0, 113, 197, 0.1), transparent 30%);
+        linear-gradient(180deg, rgba(243, 250, 255, 0.92), rgba(231, 243, 255, 0.96)),
+        radial-gradient(circle at 0% 0%, rgba(0, 113, 197, 0.18), transparent 34%);
     }
 
     .intel-tag {
@@ -118,8 +118,17 @@
 
     .company {
       margin: 0;
-      color: var(--muted);
+      color: var(--brand-dark);
+      font-weight: 600;
       font-size: 0.92rem;
+    }
+
+    .address {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
+      max-width: 620px;
     }
 
     .meta {
@@ -134,7 +143,7 @@
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 9px 13px;
-      background: #ffffff;
+      background: #f5f9ff;
       font-size: 0.84rem;
       text-decoration: none;
       color: var(--ink);
@@ -163,7 +172,7 @@
       cursor: pointer;
       transition: transform 150ms ease, box-shadow 150ms ease;
       color: var(--ink);
-      background: #ffffff;
+      background: #f8fbff;
     }
 
     .btn:hover {
@@ -172,13 +181,48 @@
     }
 
     .btn.primary {
-      background: linear-gradient(135deg, var(--brand), #00a0e3);
+      background: linear-gradient(135deg, #005fa9, #0a7cc4);
       color: #ffffff;
       border-color: var(--brand);
     }
 
     .btn.alt {
       border-color: var(--line);
+    }
+
+    .flavors {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      padding: 10px;
+      background: linear-gradient(130deg, rgba(3, 96, 170, 0.06), rgba(0, 174, 234, 0.08));
+    }
+
+    .flavor-title {
+      margin: 0 0 8px;
+      color: var(--brand-dark);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .flavor-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .flavor-chip {
+      border-radius: 999px;
+      border: 1px solid rgba(0, 95, 169, 0.22);
+      background: #f2f8ff;
+      color: #014f8b;
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      line-height: 1;
     }
 
     .right h2 {
@@ -289,12 +333,14 @@
             <h1 id="name"></h1>
             <p id="role" class="role"></p>
             <p id="company" class="company"></p>
+            <p id="address" class="address"></p>
           </div>
         </div>
 
         <div class="meta">
           <a id="phonePill" class="pill"></a>
           <a id="emailPill" class="pill"></a>
+          <a id="locationPill" class="pill" target="_blank" rel="noopener noreferrer"></a>
         </div>
 
         <div class="actions">
@@ -308,6 +354,12 @@
 
       <aside class="right">
         <h2>Scan And Connect</h2>
+
+        <section class="flavors" aria-label="Intel flavours">
+          <p class="flavor-title">Intel Flavours</p>
+          <div id="flavorList" class="flavor-list"></div>
+        </section>
+
         <div class="qr-grid">
           <figure class="qr-card">
             <img id="cardQr" alt="QR code to open this digital card">
@@ -340,7 +392,14 @@
       phoneIntl: "+60126575362",
       phoneWa: "60126575362",
       email: "kevin.rayappan@intel.com",
+      addressDisplay: "Intel Kulim KM6, Jalan Kulim, 09000 Kulim, Kedah, Malaysia",
+      addressStreet: "KM6, Jalan Kulim",
+      addressCity: "Kulim",
+      addressRegion: "Kedah",
+      addressPostal: "09000",
+      addressCountry: "Malaysia",
       linkedin: "https://www.linkedin.com/in/kevin-rayappan/",
+      flavors: ["Intel Blue", "Silicon Precision", "Performance DNA", "Future Ready"],
       photoUrl: "https://github.com/krayappa.png",
       intelLogoUrl: "https://raw.githubusercontent.com/krayappa/Self-projects/feature/digital-name-card/assets/intel-logo.jpg"
     };
@@ -359,6 +418,8 @@
       "TITLE:" + profile.role,
       "TEL;TYPE=CELL:" + profile.phoneIntl,
       "EMAIL;TYPE=INTERNET;TYPE=WORK:" + profile.email,
+      "ADR;TYPE=WORK:;;" + profile.addressStreet + ";" + profile.addressCity + ";" + profile.addressRegion + ";" + profile.addressPostal + ";" + profile.addressCountry,
+      "LABEL;TYPE=WORK:" + profile.addressDisplay,
       "URL:" + profile.linkedin,
       "END:VCARD"
     ].join("\n");
@@ -366,6 +427,7 @@
     document.getElementById("name").textContent = profile.name;
     document.getElementById("role").textContent = profile.role;
     document.getElementById("company").textContent = profile.company;
+    document.getElementById("address").textContent = profile.addressDisplay;
 
     const profilePhoto = document.getElementById("profilePhoto");
     profilePhoto.src = profile.photoUrl;
@@ -380,6 +442,18 @@
     const emailPill = document.getElementById("emailPill");
     emailPill.href = "mailto:" + profile.email;
     emailPill.textContent = profile.email;
+
+    const locationPill = document.getElementById("locationPill");
+    locationPill.href = "https://maps.google.com/?q=" + encodeURIComponent(profile.addressDisplay);
+    locationPill.textContent = "Intel Kulim KM6";
+
+    const flavorList = document.getElementById("flavorList");
+    profile.flavors.forEach((item) => {
+      const chip = document.createElement("span");
+      chip.className = "flavor-chip";
+      chip.textContent = item;
+      flavorList.appendChild(chip);
+    });
 
     document.getElementById("waBtn").href = waLink;
     document.getElementById("linkedinBtn").href = profile.linkedin;
