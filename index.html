@@ -190,41 +190,6 @@
       border-color: var(--line);
     }
 
-    .flavors {
-      margin-top: 12px;
-      margin-bottom: 12px;
-      border: 1px dashed var(--line);
-      border-radius: 14px;
-      padding: 10px;
-      background: linear-gradient(130deg, rgba(3, 96, 170, 0.06), rgba(0, 174, 234, 0.08));
-    }
-
-    .flavor-title {
-      margin: 0 0 8px;
-      color: var(--brand-dark);
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .flavor-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .flavor-chip {
-      border-radius: 999px;
-      border: 1px solid rgba(0, 95, 169, 0.22);
-      background: #f2f8ff;
-      color: #014f8b;
-      padding: 6px 10px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-
     .right h2 {
       margin: 0 0 10px;
       font-size: 0.95rem;
@@ -355,11 +320,6 @@
       <aside class="right">
         <h2>Scan And Connect</h2>
 
-        <section class="flavors" aria-label="Intel flavours">
-          <p class="flavor-title">Intel Flavours</p>
-          <div id="flavorList" class="flavor-list"></div>
-        </section>
-
         <div class="qr-grid">
           <figure class="qr-card">
             <img id="cardQr" alt="QR code to open this digital card">
@@ -399,7 +359,6 @@
       addressPostal: "09000",
       addressCountry: "Malaysia",
       linkedin: "https://www.linkedin.com/in/kevin-rayappan/",
-      flavors: ["Intel Blue", "Silicon Precision", "Performance DNA", "Future Ready"],
       photoUrl: "https://github.com/krayappa.png",
       intelLogoUrl: "https://raw.githubusercontent.com/krayappa/Self-projects/feature/digital-name-card/assets/intel-logo.jpg"
     };
@@ -446,14 +405,6 @@
     const locationPill = document.getElementById("locationPill");
     locationPill.href = "https://maps.google.com/?q=" + encodeURIComponent(profile.addressDisplay);
     locationPill.textContent = "Intel Kulim KM6";
-
-    const flavorList = document.getElementById("flavorList");
-    profile.flavors.forEach((item) => {
-      const chip = document.createElement("span");
-      chip.className = "flavor-chip";
-      chip.textContent = item;
-      flavorList.appendChild(chip);
-    });
 
     document.getElementById("waBtn").href = waLink;
     document.getElementById("linkedinBtn").href = profile.linkedin;
