@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kevin Rayappan | Digital Name Card</title>
+  <meta name="description" content="Digital name card for Kevin Rayappan with WhatsApp and LinkedIn links.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #112022;
+      --muted: #3f5256;
+      --paper: #fffef9;
+      --line: rgba(17, 32, 34, 0.15);
+      --brand: #0071c5;
+      --brand-dark: #00538f;
+      --accent: #ff7f50;
+      --shadow: rgba(17, 32, 34, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at -10% -20%, #ffd8b8 0%, transparent 45%),
+        radial-gradient(900px 700px at 120% 0%, #c6e8ff 0%, transparent 48%),
+        linear-gradient(130deg, #fff7ec 0%, #e8f6ff 45%, #fffdf8 100%);
+      padding: 28px 16px;
+      display: grid;
+      place-items: center;
+    }
+
+    .card {
+      width: min(1024px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: color-mix(in oklab, var(--paper) 90%, white 10%);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 22px 50px var(--shadow);
+      overflow: hidden;
+      animation: card-enter 520ms ease-out both;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 0;
+    }
+
+    .left,
+    .right {
+      padding: 26px;
+    }
+
+    .right {
+      border-left: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9)),
+        radial-gradient(circle at 0% 0%, rgba(0, 113, 197, 0.1), transparent 30%);
+    }
+
+    .intel-tag {
+      width: 86px;
+      margin-left: auto;
+      margin-bottom: 16px;
+      opacity: 0.95;
+    }
+
+    .identity {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .profile-photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      line-height: 0.95;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+    }
+
+    .role {
+      margin: 10px 0 2px;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .company {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: #ffffff;
+      font-size: 0.84rem;
+      text-decoration: none;
+      color: var(--ink);
+      transition: transform 160ms ease;
+    }
+
+    .pill:hover {
+      transform: translateY(-1px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      padding: 10px 14px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(17, 32, 34, 0.1);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--brand), #00a0e3);
+      color: #ffffff;
+      border-color: var(--brand);
+    }
+
+    .btn.alt {
+      border-color: var(--line);
+    }
+
+    .right h2 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+    }
+
+    .qr-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .qr-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px;
+      background: #ffffff;
+    }
+
+    .qr-card img {
+      width: 100%;
+      display: block;
+      border-radius: 11px;
+      aspect-ratio: 1 / 1;
+      background: #ffffff;
+    }
+
+    .qr-title {
+      margin: 10px 0 4px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .qr-sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @keyframes card-enter {
+      from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .right {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .left,
+      .right {
+        padding: 18px;
+      }
+
+      .identity {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .profile-photo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section class="grid">
+      <article class="left">
+        <img id="intelLogo" class="intel-tag" alt="Intel logo">
+
+        <div class="identity">
+          <img id="profilePhoto" class="profile-photo" alt="Profile photo">
+          <div>
+            <p class="eyebrow">Digital Name Card</p>
+            <h1 id="name"></h1>
+            <p id="role" class="role"></p>
+            <p id="company" class="company"></p>
+          </div>
+        </div>
+
+        <div class="meta">
+          <a id="phonePill" class="pill"></a>
+          <a id="emailPill" class="pill"></a>
+        </div>
+
+        <div class="actions">
+          <a id="waBtn" class="btn primary" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a id="linkedinBtn" class="btn alt" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a id="emailBtn" class="btn alt">Email</a>
+          <button id="copyPageLinkBtn" class="btn alt" type="button">Copy Card Link</button>
+          <a id="downloadVcfBtn" class="btn alt" download="Kevin_Rayappan.vcf">Download Contact</a>
+        </div>
+      </article>
+
+      <aside class="right">
+        <h2>Scan And Connect</h2>
+        <div class="qr-grid">
+          <figure class="qr-card">
+            <img id="cardQr" alt="QR code to open this digital card">
+            <figcaption>
+              <p class="qr-title">Open Digital Card</p>
+              <p class="qr-sub">Use this on your printed card or phone lock screen.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="qr-card">
+            <img id="waQr" alt="QR code to open WhatsApp chat">
+            <figcaption>
+              <p class="qr-title">Open WhatsApp Chat</p>
+              <p class="qr-sub">Opens message draft. Visitor still taps Send.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="note" id="liveUrlNote"></p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const profile = {
+      name: "Kevin Rayappan",
+      role: "Product Development Engineer / Application Engineer",
+      company: "Intel",
+      phoneDisplay: "+60 12-657 5362",
+      phoneIntl: "+60126575362",
+      phoneWa: "60126575362",
+      email: "kevin.rayappan@intel.com",
+      linkedin: "https://www.linkedin.com/in/kevin-rayappan/",
+      photoUrl: "https://github.com/krayappa.png",
+      intelLogoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Intel-logo.svg/512px-Intel-logo.svg.png"
+    };
+
+    const waMessage = "Hi Kevin, I scanned your digital name card and would like to connect.";
+    const waLink = "https://wa.me/" + profile.phoneWa + "?text=" + encodeURIComponent(waMessage);
+    const cardUrl = window.location.href.split("#")[0];
+    const qrBase = "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=";
+
+    const vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "FN:" + profile.name,
+      "N:Rayappan;Kevin;;;",
+      "ORG:" + profile.company,
+      "TITLE:" + profile.role,
+      "TEL;TYPE=CELL:" + profile.phoneIntl,
+      "EMAIL;TYPE=INTERNET;TYPE=WORK:" + profile.email,
+      "URL:" + profile.linkedin,
+      "END:VCARD"
+    ].join("\n");
+
+    document.getElementById("name").textContent = profile.name;
+    document.getElementById("role").textContent = profile.role;
+    document.getElementById("company").textContent = profile.company;
+
+    const profilePhoto = document.getElementById("profilePhoto");
+    profilePhoto.src = profile.photoUrl;
+
+    const intelLogo = document.getElementById("intelLogo");
+    intelLogo.src = profile.intelLogoUrl;
+
+    const phonePill = document.getElementById("phonePill");
+    phonePill.href = "tel:" + profile.phoneIntl;
+    phonePill.textContent = profile.phoneDisplay;
+
+    const emailPill = document.getElementById("emailPill");
+    emailPill.href = "mailto:" + profile.email;
+    emailPill.textContent = profile.email;
+
+    document.getElementById("waBtn").href = waLink;
+    document.getElementById("linkedinBtn").href = profile.linkedin;
+    document.getElementById("emailBtn").href = "mailto:" + profile.email + "?subject=" + encodeURIComponent("Hello Kevin");
+
+    document.getElementById("cardQr").src = qrBase + encodeURIComponent(cardUrl);
+    document.getElementById("waQr").src = qrBase + encodeURIComponent(waLink);
+
+    const downloadVcfBtn = document.getElementById("downloadVcfBtn");
+    downloadVcfBtn.href = URL.createObjectURL(new Blob([vcard], { type: "text/vcard;charset=utf-8" }));
+
+    const copyPageLinkBtn = document.getElementById("copyPageLinkBtn");
+    copyPageLinkBtn.addEventListener("click", async () => {
+      const oldText = copyPageLinkBtn.textContent;
+      try {
+        await navigator.clipboard.writeText(cardUrl);
+        copyPageLinkBtn.textContent = "Copied";
+      } catch (_err) {
+        window.prompt("Copy this page URL", cardUrl);
+      }
+      setTimeout(() => {
+        copyPageLinkBtn.textContent = oldText;
+      }, 1400);
+    });
+
+    document.getElementById("liveUrlNote").textContent = "Page URL: " + cardUrl;
+  </script>
+</body>
+</html>
