@@ -51,20 +51,12 @@
 
     .grid {
       display: grid;
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns: 1fr;
       gap: 0;
     }
 
-    .left,
-    .right {
+    .left {
       padding: 26px;
-    }
-
-    .right {
-      border-left: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(243, 250, 255, 0.92), rgba(231, 243, 255, 0.96)),
-        radial-gradient(circle at 0% 0%, rgba(0, 113, 197, 0.18), transparent 34%);
     }
 
     .intel-tag {
@@ -190,49 +182,8 @@
       border-color: var(--line);
     }
 
-    .right h2 {
-      margin: 0 0 10px;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--brand-dark);
-    }
-
-    .qr-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .qr-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 10px;
-      background: #ffffff;
-    }
-
-    .qr-card img {
-      width: 100%;
-      display: block;
-      border-radius: 11px;
-      aspect-ratio: 1 / 1;
-      background: #ffffff;
-    }
-
-    .qr-title {
-      margin: 10px 0 4px;
-      font-weight: 700;
-      font-size: 0.88rem;
-    }
-
-    .qr-sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
     .note {
-      margin-top: 12px;
+      margin-top: 14px;
       font-size: 0.75rem;
       color: var(--muted);
     }
@@ -249,20 +200,8 @@
       }
     }
 
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .right {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-      }
-    }
-
     @media (max-width: 520px) {
-      .left,
-      .right {
+      .left {
         padding: 18px;
       }
 
@@ -315,31 +254,9 @@
           <button id="copyPageLinkBtn" class="btn alt" type="button">Copy Card Link</button>
           <a id="downloadVcfBtn" class="btn alt" download="Kevin_Rayappan.vcf">Download Contact</a>
         </div>
-      </article>
-
-      <aside class="right">
-        <h2>Scan And Connect</h2>
-
-        <div class="qr-grid">
-          <figure class="qr-card">
-            <img id="cardQr" alt="QR code to open this digital card">
-            <figcaption>
-              <p class="qr-title">Open Digital Card</p>
-              <p class="qr-sub">Use this on your printed card or phone lock screen.</p>
-            </figcaption>
-          </figure>
-
-          <figure class="qr-card">
-            <img id="waQr" alt="QR code to open WhatsApp chat">
-            <figcaption>
-              <p class="qr-title">Open WhatsApp Chat</p>
-              <p class="qr-sub">Opens message draft. Visitor still taps Send.</p>
-            </figcaption>
-          </figure>
-        </div>
 
         <p class="note" id="liveUrlNote"></p>
-      </aside>
+      </article>
     </section>
   </main>
 
@@ -366,7 +283,6 @@
     const waMessage = "Hi Kevin, I scanned your digital name card and would like to connect.";
     const waLink = "https://wa.me/" + profile.phoneWa + "?text=" + encodeURIComponent(waMessage);
     const cardUrl = window.location.href.split("#")[0];
-    const qrBase = "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=";
 
     const vcard = [
       "BEGIN:VCARD",
@@ -409,9 +325,6 @@
     document.getElementById("waBtn").href = waLink;
     document.getElementById("linkedinBtn").href = profile.linkedin;
     document.getElementById("emailBtn").href = "mailto:" + profile.email + "?subject=" + encodeURIComponent("Hello Kevin");
-
-    document.getElementById("cardQr").src = qrBase + encodeURIComponent(cardUrl);
-    document.getElementById("waQr").src = qrBase + encodeURIComponent(waLink);
 
     const downloadVcfBtn = document.getElementById("downloadVcfBtn");
     downloadVcfBtn.href = URL.createObjectURL(new Blob([vcard], { type: "text/vcard;charset=utf-8" }));
